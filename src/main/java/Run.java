@@ -75,6 +75,8 @@ public class Run {
 				cadastroPet.setNomePet(scan.next());
 				System.out.println("Digite a Especie do Pet");
 				cadastroPet.setEspecie(scan.next());
+				System.out.println("Digite o Peso do Pet");
+				cadastroPet.setPeso(scan.nextInt());
 				System.out.println("Digite a Raça do Pet");
 				cadastroPet.setRaca(scan.next());
 				System.out.println("Digite o Email do Proprietario");
@@ -121,7 +123,14 @@ public class Run {
 				cadastrarAgendamento.setDataHoraAgendar(date);
 				System.out.println("Digite o Tipo do Serviço");
 				cadastrarAgendamento.setTipoServico(scan.next());
-				cadastrarAgendamento.setPrecoServico(cadastrarAgendamento.getTipoServico());
+				Pet petEncontrado = null;
+				for(Pet p : pets){
+					if(nomePet.equals(p.getNomePet())){
+						petEncontrado = p;
+						break;
+					}
+				}
+				cadastrarAgendamento.setPrecoServico(agendamentoService.calcPrecoServico(petEncontrado , cadastrarAgendamento.getTipoServico()));
 				
 				Agendamento agendamento = new Agendamento(cadastrarAgendamento);
 				agendamentoService.agendarServico(agendamento, agendamentos, nomePet, pets);
@@ -139,7 +148,7 @@ public class Run {
 				System.out.println("Digite para qual serviço alterar");
 				atualizarAgendamento.setTipoServico(scan.next());
 				System.out.println("Digite o novo preco");
-				atualizarAgendamento.setPrecoServico(scan.next());
+				atualizarAgendamento.setPrecoServico(scan.nextDouble());
 				
 				agendamentoService.atualizarAgendamento(agendamentos, dataBuscar, atualizarAgendamento);
 				break;

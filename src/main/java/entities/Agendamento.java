@@ -6,7 +6,8 @@ import dto.CadastrarAgendamento;
 
 public class Agendamento {
 	private LocalDate dataHoraAgendar;
-	private String tipoServico, precoServico;
+	private String tipoServico;
+	private double precoServico;
 	
 	public Agendamento(CadastrarAgendamento castrarAgendamento) {
 		this.dataHoraAgendar = castrarAgendamento.getDataHoraAgendar();
@@ -27,10 +28,10 @@ public class Agendamento {
 	public void setTipoServico(String tipoServico) {
 		this.tipoServico = tipoServico;
 	}
-	public String getPrecoServico() {
+	public double getPrecoServico() {
 		return precoServico;
 	}
-	public void setPrecoServico(String precoServico) {
+	public void setPrecoServico(double precoServico) {
 		this.precoServico = precoServico;
 	}
 

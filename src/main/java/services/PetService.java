@@ -26,7 +26,7 @@ public class PetService {
 			}
 		}
 		
-		if (!petJaCadastrado && proprietarioExistente == true && pet.getNomePet() != null && pet.getRaca() != null && pet.getEspecie() != null && pet.getNascimento() != null && pet.getIdadePet() != 0) {
+		if (!petJaCadastrado && proprietarioExistente && pet.getNomePet() != null && pet.getRaca() != null && pet.getEspecie() != null && pet.getNascimento() != null && pet.getIdadePet() != 0) {
 			pets.add(pet);
 			System.out.println("Adicionado com Sucesso");
 		} else {

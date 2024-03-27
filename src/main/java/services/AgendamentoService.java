@@ -5,14 +5,15 @@ import java.util.List;
 
 import dto.CadastrarAgendamento;
 import entities.Agendamento;
+import entities.Cachorro;
 import entities.Pet;
 
-public class AgendamentoService {
+public class AgendamentoService{
 	public void agendarServico(Agendamento agendamento, List<Agendamento> agendamentos, String nomePet ,List<Pet> pets) {
 		boolean verificacao = false;
 		boolean verificacao2 = false;
 		LocalDate dataAtual = LocalDate.now();
-		
+
 		for(Agendamento a : agendamentos) {
 			if(agendamento.getDataHoraAgendar().isEqual(a.getDataHoraAgendar())) {
 				verificacao = true;
@@ -22,17 +23,22 @@ public class AgendamentoService {
 		for(Pet p : pets) {
 			if(p.getNomePet().equals(nomePet)) {
 				verificacao2 = true;
-				break;				
+				break;
 			}
 		}
-		if(verificacao == false && verificacao2 == true && agendamento.getDataHoraAgendar().isAfter(dataAtual) && agendamento.getDataHoraAgendar() != null && agendamento.getTipoServico() != null && agendamento.getTipoServico() == "consulta" && agendamento.getTipoServico() == "tosa" && agendamento.getTipoServico() == "banho") {
+		if(!verificacao && verificacao2 && agendamento.getDataHoraAgendar().isAfter(dataAtual) && agendamento.getDataHoraAgendar() != null && agendamento.getTipoServico() != null && agendamento.getTipoServico() == "consulta" && agendamento.getTipoServico() == "tosa" && agendamento.getTipoServico() == "banho") {
 			agendamentos.add(agendamento);
 			System.out.println("Marcado com Sucesso");
 		} else {
 			System.out.println("Erro para marcar");
 		}
 	}
-	
+
+	public double calcPrecoServico(Pet pet, String nomeServico) {
+		CalculoCustoStrategy calculoCachorro = new Cachorro();
+		return calculoCachorro.calcularCusto(pet, nomeServico);
+	}
+
 	public void todosAgendamentos(List<Agendamento> agendamentos) {
 		for (Agendamento a : agendamentos) {
 			System.out.println(a);
@@ -54,6 +60,7 @@ public class AgendamentoService {
 	}
 	
 	public void deletarAgendamento(List<Agendamento> agendamentos, LocalDate dataBuscar2) {
+
 		for (Agendamento a : agendamentos) {
 			if (dataBuscar2.isEqual(a.getDataHoraAgendar())) {
 				agendamentos.remove(a);
@@ -63,20 +70,5 @@ public class AgendamentoService {
 				System.out.println("Nenhum Proprietario Encontrado com esses Dados");
 			}
 		}
-	}
-	
-	public String calcPrecoServico(String nomeServico) {
-		String preco = "0";
-		switch (nomeServico) {
-		case "consulta":
-			preco = "10";
-		case "banho":
-			preco = "30";
-		case "tosa":
-			preco = "50";
-		default:
-			System.out.println("Digite um Serviço valido");
-		}
-		return preco; 
 	}
 }

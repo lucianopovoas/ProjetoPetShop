@@ -4,7 +4,7 @@ import java.time.LocalDate;
 
 public class CadastroPet {
 	private String nomePet, especie, raca, emailProprietario;
-	int idadePet;
+	int idadePet, peso;
 	private LocalDate nascimento;
 	
 	public String getNomePet() {
@@ -43,5 +43,10 @@ public class CadastroPet {
 	public void setNascimento(LocalDate nascimento) {
 		this.nascimento = nascimento;
 	}
-	
+	public int getPeso() {
+		return peso;
+	}
+	public void setPeso(int peso) {
+		this.peso = peso;
+	}
 }
